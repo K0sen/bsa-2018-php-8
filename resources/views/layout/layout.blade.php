@@ -23,11 +23,9 @@
 <body>
 
     {{-- Header --}}
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-        <div class="navbar-collapse">
-            <a class="navbar-brand" href="{{ url('/') }}">Currencies</a>
-            <a class="nav-link" href="{{ route('currencies.create') }}">Add new currency</a>
-        </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url('/') }}">Currencies</a>
+        <a class="nav-link" href="{{ route('currencies.create') }}">Add new currency</a>
     </nav>
 
     <div class="container">
