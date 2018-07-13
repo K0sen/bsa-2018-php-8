@@ -8,22 +8,30 @@
 
     <title>@yield('title')</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
           integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
           crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+          crossorigin="anonymous">
+
+    <!-- My styles -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
 
+    {{-- Header --}}
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+        <div class="navbar-collapse">
+            <a class="navbar-brand" href="{{ url('/') }}">Currencies</a>
+            <a class="nav-link" href="{{ route('currencies.create') }}">Add new currency</a>
+        </div>
+    </nav>
+
     <div class="container">
-{{--        @yield('content')--}}
-        @section('content')
-            <p>This is my body content.</p>
-        @show
+        @yield('content')
     </div>
 
 </body>

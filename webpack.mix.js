@@ -14,6 +14,6 @@ let mix = require('laravel-mix');
 mix.js('resources/assets/js/scripts.js', 'public/js')
    .sass('resources/assets/sass/style.scss', 'public/css');
 
-mix.browserSync({
-    proxy: 'homestead.test'
-});
+// mix.browserSync({
+//     proxy: 'homestead.test'
+// });

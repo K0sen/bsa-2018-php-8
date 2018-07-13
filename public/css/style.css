@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*!
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,300,400,600);/*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
@@ -10413,17 +10413,11 @@ a.text-dark:focus {
 
 html,
 body {
-  background-color: black;
+  background-color: #fff;
   color: #636b6f;
   font-family: 'Raleway', sans-serif;
-  font-weight: 100;
-  height: 100vh;
-  margin: 0;
-}
-
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
