@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ValidatedCurrencyRequest;
 use App\Services\CurrencyRepositoryInterface;
-use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
@@ -37,18 +37,20 @@ class CurrencyController extends Controller
      */
     public function create()
     {
-        //
+        return view('currency.currency-create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ValidatedCurrencyRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(ValidatedCurrencyRequest $request)
     {
-        //
+        $this->currencyRepository->create($request);
+
+        return redirect(route('currencies.index'));
     }
 
     /**
@@ -60,9 +62,9 @@ class CurrencyController extends Controller
     public function show($id)
     {
         $currency = $this->currencyRepository->findById($id);
-//        if ($currency === null) {
-//            return response()->json(['message' => 'The currency was not found'], 404);
-//        }
+        if (!$currency) {
+            abort(404);
+        }
 
         return view('currency.currency', compact('currency'));
     }
@@ -75,7 +77,12 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $currency = $this->currencyRepository->findById($id);
+        if (!$currency) {
+            abort(404);
+        }
+
+        return view('currency.currency-update', compact('currency'));
     }
 
     /**
@@ -85,9 +92,16 @@ class CurrencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ValidatedCurrencyRequest $request, $id)
     {
-        //
+        $currency = $this->currencyRepository->findById($id);
+        if (!$currency) {
+            abort(404);
+        }
+
+        $updatedCurrency = $this->currencyRepository->update($request, $currency);
+
+        return redirect(route('currencies.show', $updatedCurrency->id));
     }
 
     /**
@@ -100,6 +114,6 @@ class CurrencyController extends Controller
     {
         $this->currencyRepository->delete($id);
 
-        return redirect('/');
+        return redirect('currencies');
     }
 }

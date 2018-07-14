@@ -24,11 +24,11 @@
 
     {{-- Header --}}
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url('/') }}">Currencies</a>
-        <a class="nav-link" href="{{ route('currencies.create') }}">Add new currency</a>
+        <a class="navbar-brand" href="{{ url('currencies') }}">Currencies</a>
+        <a class="nav-link" href="{{ route('currencies.create') }}">Add</a>
     </nav>
 
-    <div class="container">
+    <div class="container currency-content">
         @yield('content')
     </div>
 

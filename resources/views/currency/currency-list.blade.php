@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layouts.layout')
 
 @section('title', 'Currency market')
 
@@ -7,9 +7,9 @@
 @endsection
 
 @section('content')
-    <h1 class="text-center">Currency market</h1>
+    <h1 class="text-center">Currency market(Views Homework)</h1>
     @if (count($currencies) > 0)
-        @include('currency.currency-table', ['currencies' => $currencies])
+        @include('currency.pieces.currency-table', ['currencies' => $currencies])
     @else
         <strong>No currencies</strong>
     @endif

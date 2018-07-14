@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Currency;
+use App\Http\Requests\ValidatedCurrencyRequest;
 use Illuminate\Database\Eloquent\Collection;
 
 class CurrencyRepository implements CurrencyRepositoryInterface
@@ -16,10 +17,10 @@ class CurrencyRepository implements CurrencyRepositoryInterface
     }
 
     /**
-     * @param int $id
+     * @param $id
      * @return Currency|null
      */
-    public function findById(int $id): ?Currency
+    public function findById($id): ?Currency
     {
         return Currency::find($id);
     }
@@ -35,62 +36,30 @@ class CurrencyRepository implements CurrencyRepositoryInterface
         }
     }
 
-//    public function findActive(): array
-//    {
-//        return array_filter($this->currencies, function ($currency) {
-//            /** @var $currency Currency */
-//            return $currency->isActive();
-//        });
+    /**
+     * @param ValidatedCurrencyRequest $request
+     * @return Currency
+     */
+    public function create(ValidatedCurrencyRequest $request): Currency
+    {
+        $currency = new Currency();
+        $currency->title = $request->title;
+        $currency->short_name = $request->short_name;
+        $currency->logo_url = $request->logo_url;
+        $currency->price = $request->price;
+        $currency->save();
 
-//    }
-//    public function findById(int $id): ?Currency
-//    {
-//        foreach ($this->currencies as $currency) {
-//            if ($currency->getId() === $id) {
-//                return $currency;
-//            }
-//        }
-//
-//        return null;
+        return $currency;
+    }
 
-//    }
-//    public function save(Currency $currency): void
-//    {
-//        if ($this->findById($currency->getId()) === null) {
-//            $this->currencies[] = $currency;
-//        } else {
-//            $index = $this->findCurrencyIndex($currency);
-//            if ($index !== null) {
-//                $this->currencies[$index] = $currency;
-//            }
-//        }
+    public function update(ValidatedCurrencyRequest $request, Currency $currency): Currency
+    {
+        $currency->title = $request->title;
+        $currency->short_name = $request->short_name;
+        $currency->logo_url = $request->logo_url;
+        $currency->price = $request->price;
+        $currency->save();
 
-//    }
-//
-//    public function findAvailableId(): int
-//    {
-//        for ($id = 1; $id <= $this->getCurrenciesCount(); $id++) {
-//            if ($this->findById($id) === null) {
-//                return $id;
-//            }
-//        }
-//
-//        return $id;
-//    }
-
-//    private function findCurrencyIndex(Currency $currency): ?int
-//    {
-//        foreach ($this->currencies as $index => $actualCurrency) {
-//            if ($actualCurrency->getId() === $currency->getId()) {
-//                return $index;
-//            }
-//        }
-//
-//        return null;
-//    }
-
-//    private function getCurrenciesCount(): int
-//    {
-//        return \count($this->currencies);
-//    }
+        return $currency;
+    }
 }
