@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Add a new currency')
+@section('title', $currency->title . ' update')
 
 @section('content')
     @include('currency.pieces.currency-form', ['currency' => $currency])

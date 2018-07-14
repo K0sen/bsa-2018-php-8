@@ -8,7 +8,7 @@
         <div class="h2">
             <img src="{{ $currency->logo_url }}" alt="logo">
             <span>{{ $currency->title }}</span>
-            <small>({{ $currency->short_name }}) - </small>
+            <small>({{ $currency->short_name }}): </small>
             <span>{{ $currency->price }} USD</span>
         </div>
         @include('currency.pieces.edit-button', ['id' => $currency->id])

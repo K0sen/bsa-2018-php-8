@@ -72,6 +72,6 @@
     @endif
 
     <div>
-        <button type="submit">Save</button>
+        <button class="btn btn-success" type="submit">Save</button>
     </div>
 </form>
