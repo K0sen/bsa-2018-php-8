@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  lara1:
+    build: .
+    image: laravel-8
+    volumes:
+      - .:/var/www/html
+    command: >
+      bash -c "cp .env.example .env
+      && php artisan key:generate
+      && php artisan serve --host=0.0.0.0 --port=8084
+      && php artisan migrate --seed"
+    ports:
+      - 8084:8084
+    links:
+      - mySQL
+      - composer
+    depends_on:
+      - mySQL
+      - composer
+
+  mySQL:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_PASSWORD=secret
+      - MYSQL_USER=homestead
+      - MYSQL_DATABASE=homestead
+
+  composer:
+    image: composer:1.5
+    command: install -d=/var/www/html
+    volumes:
+    - .:/var/www/html
